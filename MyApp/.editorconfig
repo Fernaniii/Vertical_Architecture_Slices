@@ -1,0 +1,24 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.{csproj,props,slnx,json,xml}]
+indent_size = 2
+
+[**/Migrations/*.cs]
+generated_code = true
+
+[*.cs]
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_using_directive_placement = outside_namespace:warning
+dotnet_sort_system_directives_first = true
+csharp_style_var_for_built_in_types = true:suggestion
+dotnet_style_qualification_for_field = false:warning
+# unused usings
+dotnet_diagnostic.IDE0005.severity = warning

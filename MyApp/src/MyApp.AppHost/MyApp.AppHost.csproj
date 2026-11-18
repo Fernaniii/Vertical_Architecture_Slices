@@ -1,0 +1,13 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.4">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>myapp-apphost</UserSecretsId>
+    <!-- We run via `dotnet run`, not the Aspire CLI bundle. -->
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.Redis" />
+    <ProjectReference Include="..\MyApp.Api\MyApp.Api.csproj" />
+  </ItemGroup>
+</Project>

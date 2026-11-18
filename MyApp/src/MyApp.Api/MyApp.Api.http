@@ -1,0 +1,70 @@
+@host = http://localhost:5000
+@productId = 00000000-0000-0000-0000-000000000000
+@token = {{login.response.body.accessToken}}
+
+### Health
+GET {{host}}/
+
+### Register
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "ChangeMe123!"
+}
+
+### Login (log in as the seeded admin instead to try DELETE)
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "ChangeMe123!"
+}
+
+### Refresh (rotates the refresh token; the old one stops working)
+POST {{host}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{login.response.body.refreshToken}}"
+}
+
+### Products without a token -> 401
+GET {{host}}/api/products
+
+### Create product
+POST {{host}}/api/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Keyboard",
+  "description": "Mechanical keyboard",
+  "price": 89.99
+}
+
+### List products
+GET {{host}}/api/products
+Authorization: Bearer {{token}}
+
+### Get product by id
+GET {{host}}/api/products/{{productId}}
+Authorization: Bearer {{token}}
+
+### Update product
+PUT {{host}}/api/products/{{productId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Keyboard v2",
+  "description": "Mechanical keyboard, hot-swap",
+  "price": 99.99
+}
+
+### Delete product (User -> 403, Admin -> 204)
+DELETE {{host}}/api/products/{{productId}}
+Authorization: Bearer {{token}}
