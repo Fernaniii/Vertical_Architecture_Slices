@@ -1,0 +1,2 @@
+# Vertical_Architecture_Slices
+Vertical Slices Architecture Template
